@@ -1,0 +1,32 @@
+.benefits {
+    background: #999DA0;
+    padding: 66px 0;
+
+    &__title {
+        text-align: center;
+        font-size: clamp(28px, 5vw, 32px);
+        color: #fff;
+        text-wrap: balance;
+    }
+
+    &__cards {
+        margin-top: 60px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 50px;
+    }
+
+    &__card {
+        display: grid;
+        place-items: center;
+        gap: 20px;
+        text-align: center;
+        width: min(400px, 100%);
+
+        &-txt {
+            color: #fff;
+            font-size: 18px;
+        }
+    }
+}

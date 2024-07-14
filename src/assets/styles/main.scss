@@ -1,0 +1,16 @@
+@import "fonts.scss";
+@import "common.scss";
+
+// components
+@import "@/components/navbar/navbar.scss";
+@import "@/components/footer/footer.scss";
+// components
+
+// views
+@import "@/views/introView/introView.scss";
+@import "@/views/aboutView/aboutView.scss";
+@import "@/views/servicesView/servicesView.scss";
+@import "@/views/cargoView/cargoView.scss";
+@import "@/views/benefitsView/benefitsView.scss";
+@import "@/views/companyView/companyView.scss";
+// views

@@ -1,0 +1,21 @@
+$openSans: ("Bold", 700), ("SemiBold", 600), ("Medium", 500), ("Regular", 400);
+
+@each $name, $weight in $openSans {
+  @font-face {
+    src: url(@/assets/fonts/OpenSans-#{$name}.ttf);
+    font-family: "Open Sans";
+    font-weight: $weight;
+  }
+}
+
+@font-face {
+  font-family: "Bebas Neue";
+  src: url(@/assets/fonts/BebasNeue-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url(@/assets/fonts/Montserrat-Regular.ttf);
+  font-weight: 400;
+}
