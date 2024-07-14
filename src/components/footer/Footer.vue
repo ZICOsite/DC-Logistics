@@ -7,7 +7,7 @@ const currentYear = computed(() => new Date().getFullYear());
 <template>
   <footer class="footer" id="footer">
     <div class="container">
-      <h2 class="footer__title">Контакт</h2>
+      <h2 class="footer__title">Оставить заявку</h2>
       <p class="footer__txt">
         Наши менеджеры <span class="footer__span">свяжутся с вами!</span>
       </p>

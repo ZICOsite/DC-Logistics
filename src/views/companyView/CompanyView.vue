@@ -14,8 +14,7 @@
         <p class="company__content-number">2020</p>
         <p class="company__content-number">1000</p>
         <h3 class="company__content-title">
-          «Discovery Cargo Logistics»<br />
-          предоставляет свои услуги с 2020 года
+          За это время на счету нашей компании более довольных партнеров
         </h3>
       </div>
     </div>
