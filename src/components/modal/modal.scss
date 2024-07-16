@@ -24,6 +24,16 @@
     background: #212121;
     padding: 30px;
     border-radius: 8px;
+    position: relative;
+
+    &-close {
+      position: absolute;
+      right: 5px;
+      top: -9%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
   }
 
   &__title {

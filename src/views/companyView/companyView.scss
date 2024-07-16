@@ -93,6 +93,8 @@
 
         @media (width <= 768px) {
             width: 100%;
+            object-position: top;
+            height: 300px;
         }
     }
   }
