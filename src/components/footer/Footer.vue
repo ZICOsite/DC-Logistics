@@ -20,6 +20,12 @@ const currentYear = computed(() => new Date().getFullYear());
         />
         <input
           type="text"
+          placeholder="Фамилия"
+          class="footer__form-input"
+          required
+        />
+        <input
+          type="text"
           placeholder="Телефон"
           class="footer__form-input"
           required
