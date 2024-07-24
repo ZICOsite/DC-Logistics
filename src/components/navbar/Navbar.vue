@@ -30,7 +30,7 @@ const modal = ref(false);
 // };
 
 const getAuthUser = () => {
-  router.push("/user");
+  router.push("/orders");
 };
 
 onMounted(() => {
@@ -50,11 +50,12 @@ onMounted(() => {
             height="75"
           />
         </RouterLink>
-        <div class="navbar__truckCode">
+        <form @submit.prevent="modal = true" class="navbar__truckCode">
           <input
             type="text"
             placeholder="Введите трек номер"
             class="navbar__truckCode-input"
+            required
           />
           <img
             src="@/assets/images/navbar/search.svg"
@@ -62,7 +63,7 @@ onMounted(() => {
             width="25"
             height="23"
           />
-        </div>
+        </form>
         <div class="navbar__menu" :class="{ active: menu }">
           <ul class="navbar__list">
             <li class="navbar__item">

@@ -11,9 +11,25 @@ const router = createRouter({
       component: HomePage,
     },
     {
-      path: "/user",
-      name: "user",
-      component: () => import("@/pages/UserPage.vue"),
+      path: "/orders",
+      name: "orders",
+      component: () => import("@/pages/Orders.vue"),
+      meta: {
+        auth: true,
+      },
+    },
+    {
+      path: "/order/:id-:status",
+      name: "order-info",
+      component: () => import("@/pages/OrderId.vue"),
+      meta: {
+        auth: true,
+      },
+    },
+    {
+      path: "/personal-user/",
+      name: "personal-user",
+      component: () => import("@/pages/PersonalUserPage.vue"),
       meta: {
         auth: true,
       },

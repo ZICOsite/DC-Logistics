@@ -1,60 +1,67 @@
-<script setup>
-// import axios from "axios";
-// import useAxios from "@/lib/hooks/useAxios";
-// import { useAuthStore } from "@/stores/authStores";
-// import useAxiosAuth from "@/lib/hooks/useAxiosAuth";
-import { useNavbg, navBg } from "@/helpers/navBg";
-import UserView from "@/views/userView/UserView.vue";
-import { onMounted, ref } from "vue";
+.orders {
+  height: 100dvh;
+  min-height: 900px;
+  background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.71) 0%,
+      rgba(0, 0, 0, 0.477) 100%
+    ),
+    url(@/assets/images/intro/banner.JPG) no-repeat center top / cover;
+  display: flex;
+  align-items: center;
 
-// const authStore = useAuthStore();
-// const axiosAuth = useAxiosAuth();
-// console.log(axiosAuth());
+  &__title {
+    text-align: center;
+    color: #fff;
+    font-size: clamp(28px, 5vw, 36px);
+    margin-bottom: 30px;
+  }
 
-const menu = ref(false);
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+    gap: 30px;
 
-onMounted(() => {
-  useNavbg();
-});
-</script>
+    &-card {
+      border-radius: 8px;
+      padding: 8px;
+    }
 
-<template>
-  <header class="header">
-    <nav class="nav" :class="{ active: navBg }">
-      <div class="container">
-        <RouterLink to="/" class="nav__logo">
-          <img
-            src="@/assets/images/logo.png"
-            alt="logo"
-            width="92"
-            height="75"
-          />
-        </RouterLink>
-        <div class="nav__menu" :class="{ active: menu }">
-          <ul class="nav__list">
-            <li class="nav__item">
-              <RouterLink to="/" class="nav__link">О нас</RouterLink>
-            </li>
-            <li class="nav__item">
-              <RouterLink to="/" class="nav__link">Личный кабинет</RouterLink>
-            </li>
-            <li class="nav__item">
-              <RouterLink to="/" class="nav__link">Выйти</RouterLink>
-            </li>
-          </ul>
-        </div>
-        <div class="nav__burger" @click="menu = !menu">
-          <span class="nav__burger-line" :class="{ active: menu }"></span>
-        </div>
-      </div>
-    </nav>
-  </header>
-  <main>
-    <UserView />
-  </main>
-</template>
+    &-title {
+      padding: 20px 0;
+      color: #fff;
+    }
 
-<style lang="scss" scoped>
+    &-list {
+      display: grid;
+      gap: 4px;
+    }
+
+    &-item {
+      border-radius: 4px;
+      display: flex;
+    }
+
+    &-link {
+      color: #000;
+      background: #fff;
+      font-weight: 500;
+      padding: 8px;
+      width: 100%;
+    }
+  }
+
+  .pending {
+    background: #527bcd;
+  }
+  .progress {
+    background: #f8b646;
+  }
+  .done {
+    background: #4cc457;
+  }
+}
+
 .nav {
   padding: 8px 0;
   position: relative;
@@ -168,4 +175,3 @@ onMounted(() => {
     }
   }
 }
-</style>

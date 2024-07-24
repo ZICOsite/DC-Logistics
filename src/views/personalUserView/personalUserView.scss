@@ -1,0 +1,39 @@
+.personal-user {
+  height: 100dvh;
+  min-height: 900px;
+  background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.71) 0%,
+      rgba(0, 0, 0, 0.477) 100%
+    ),
+    url(@/assets/images/intro/banner.JPG) no-repeat center top / cover;
+  display: flex;
+  align-items: center;
+
+  &__content {
+    width: min(400px, 100%);
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 16px;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+    color: #fff;
+    font-size: 18px;
+    display: grid;
+    gap: 12px;
+  }
+
+  &__btn {
+    background: #fff;
+    color: #000;
+    font-size: 20px;
+    border-radius: 8px;
+    padding: 10px 0;
+    cursor: pointer;
+  }
+
+  .user-cashback {
+    display: grid;
+    gap: 12px;
+  }
+}

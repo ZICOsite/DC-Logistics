@@ -1,0 +1,63 @@
+.order {
+  height: 100dvh;
+  min-height: 900px;
+  background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.71) 0%,
+      rgba(0, 0, 0, 0.477) 100%
+    ),
+    url(@/assets/images/intro/banner.JPG) no-repeat center top / cover;
+  display: flex;
+  align-items: center;
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+
+    @media (width <= 850px) {
+      grid-template-columns: 1fr;
+    }
+
+    &-image {
+      width: 100%;
+      border-radius: 8px;
+      aspect-ratio: 2/1;
+      object-fit: cover;
+    }
+
+    &-list {
+      display: grid;
+      gap: 10px;
+      background: rgba(41, 41, 41, 0.5);
+      backdrop-filter: blur(4px);
+      padding: 10px 16px;
+      border-radius: 8px;
+    }
+
+    &-item {
+      color: #fff;
+      font-size: 18px;
+
+      b {
+        color: red;
+
+        &.order__content-item_done {
+          color: #00f566;
+        }
+      }
+
+      .pending {
+        color: #527bcd;
+      }
+
+      .progress {
+        color: #f8b646;
+      }
+
+      .done {
+        color: #4cc457;
+      }
+    }
+  }
+}
