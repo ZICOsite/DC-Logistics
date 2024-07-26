@@ -119,6 +119,10 @@
 
   &__link {
     color: #fff;
+
+    &.current {
+      color: #f8b646;
+    }
   }
 
   &__burger {

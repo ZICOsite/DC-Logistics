@@ -18,3 +18,8 @@ export { default as cargoImg6 } from "@/assets/images/cargo/6.jpg";
 export { default as benefitsImg1 } from "@/assets/images/benefits/calendar.png";
 export { default as benefitsImg2 } from "@/assets/images/benefits/truck.png";
 export { default as benefitsImg3 } from "@/assets/images/benefits/agreement.png";
+
+export { default as accrued } from "@/assets/images/cashback/accrued.png";
+export { default as approved } from "@/assets/images/cashback/approved.png";
+export { default as interest } from "@/assets/images/cashback/interest.png";
+export { default as paid } from "@/assets/images/cashback/paid.png";

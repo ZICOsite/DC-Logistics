@@ -15,12 +15,7 @@ onMounted(() => {
     <nav class="nav" :class="{ active: navBg }">
       <div class="container">
         <RouterLink to="/" class="nav__logo">
-          <img
-            src="@/assets/images/logo.png"
-            alt="logo"
-            width="92"
-            height="75"
-          />
+          <img src="@/assets/images/logo.png" alt="logo" width="92" height="75" />
         </RouterLink>
         <div class="nav__menu" :class="{ active: menu }">
           <ul class="nav__list">
@@ -28,7 +23,10 @@ onMounted(() => {
               <RouterLink to="/" class="nav__link">О нас</RouterLink>
             </li>
             <li class="nav__item">
-              <RouterLink to="/personal-user" class="nav__link"
+              <RouterLink to="/orders" class="nav__link">Заказы</RouterLink>
+            </li>
+            <li class="nav__item">
+              <RouterLink to="/personal-user" class="nav__link current"
                 >Личный кабинет</RouterLink
               >
             </li>
