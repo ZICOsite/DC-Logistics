@@ -1,11 +1,7 @@
-<script setup></script>
-
 <template>
   <section class="company" id="company">
     <div class="container">
-      <h2 class="company__title">
-        Наша компания предоставляет следующие виды услуг
-      </h2>
+      <h2 class="company__title">Наша компания предоставляет следующие виды услуг</h2>
       <div class="company__content">
         <h3 class="company__content-title">
           «Discovery Cargo Logistics»<br />
@@ -50,7 +46,6 @@
       width="100%"
       height="600"
       style="border: 0"
-      allowfullscreen=""
       loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"
       class="company__map"
