@@ -1,56 +1,20 @@
 <script setup>
-const kanban = [
-  {
-    id: 1,
-    truckNum: 123,
-    status: "pending",
-  },
-  {
-    id: 2,
-    truckNum: 123,
-    status: "pending",
-  },
-  {
-    id: 3,
-    truckNum: 1234,
-    status: "progress",
-  },
-  {
-    id: 4,
-    truckNum: 1234,
-    status: "progress",
-  },
-  {
-    id: 5,
-    truckNum: 1234,
-    status: "progress",
-  },
-  {
-    id: 6,
-    truckNum: 12345,
-    status: "done",
-  },
-  {
-    id: 7,
-    truckNum: 12345,
-    status: "done",
-  },
-  {
-    id: 8,
-    truckNum: 12345,
-    status: "done",
-  },
-  {
-    id: 9,
-    truckNum: 12345,
-    status: "done",
-  },
-];
+import api from "@/services/api";
+import { ref } from "vue";
 
-const { pending, progress, done } = Object.groupBy(
-  kanban,
-  ({ status }) => status
-);
+const kanban = ref(null);
+
+const getOrders = async () => {
+  try {
+    const { data } = await api.getOrders("orders/kanban_view/");
+    const orders = Object.groupBy(data, ({ status }) => status);
+    kanban.value = orders;
+  } catch (error) {
+    console.error(error.detail);
+  }
+};
+
+getOrders();
 </script>
 
 <template>
@@ -59,43 +23,58 @@ const { pending, progress, done } = Object.groupBy(
       <h2 class="orders__title">Статус заказов</h2>
       <div class="orders__content">
         <div class="orders__content-cards">
-          <div :class="['orders__content-card', { pending }]">
+          <div :class="['orders__content-card', { pending: kanban?.pending }]">
             <h3 class="orders__content-title">✔ В ожидании</h3>
             <ul class="orders__content-list">
               <li
-                v-for="item in pending"
+                v-for="item in kanban?.pending"
                 :key="item.id"
                 class="orders__content-item"
+                title="Трек номер"
               >
-                <RouterLink :to="`order/${item.id}-${item.status}`" class="orders__content-link">{{ item.truckNum }}</RouterLink>
+                <RouterLink
+                  :to="`order/${item.id}-${item.status}`"
+                  class="orders__content-link"
+                  >{{ item.truck_num }}</RouterLink
+                >
               </li>
             </ul>
           </div>
         </div>
         <div class="orders__content-cards">
-          <div :class="['orders__content-card', { progress }]">
+          <div :class="['orders__content-card', { progress: kanban?.in_progress }]">
             <h3 class="orders__content-title">✔ В процессе</h3>
             <ul class="orders__content-list">
               <li
-                v-for="item in progress"
+                v-for="item in kanban?.in_progress"
                 :key="item.id"
                 class="orders__content-item"
+                title="Трек номер"
               >
-                <RouterLink :to="`order/${item.id}-${item.status}`" class="orders__content-link">{{ item.truckNum }}</RouterLink>
+                <RouterLink
+                  :to="`order/${item.id}-${item.status}`"
+                  class="orders__content-link"
+                  >{{ item.truck_num }}</RouterLink
+                >
               </li>
             </ul>
           </div>
         </div>
         <div class="orders__content-cards">
-          <div :class="['orders__content-card', { done }]">
+          <div :class="['orders__content-card', { done: kanban?.completed }]">
             <h3 class="orders__content-title">✔ Завершенный</h3>
             <ul class="orders__content-list">
               <li
-                v-for="item in done"
+                v-for="item in kanban?.completed"
                 :key="item.id"
                 class="orders__content-item"
+                title="Трек номер"
               >
-                <RouterLink :to="`order/${item.id}-${item.status}`" class="orders__content-link">{{ item.truckNum }}</RouterLink>
+                <RouterLink
+                  :to="`order/${item.id}-${item.status}`"
+                  class="orders__content-link"
+                  >{{ item.truck_num }}</RouterLink
+                >
               </li>
             </ul>
           </div>

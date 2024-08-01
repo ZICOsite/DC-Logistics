@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "@/pages/HomePage.vue";
-// import { useAuthStore } from "@/stores/authStores";
+import { useAuthStore } from "@/stores/authStore";
+import api from "@/services/api";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,7 +16,7 @@ const router = createRouter({
       name: "orders",
       component: () => import("@/pages/Orders.vue"),
       meta: {
-        auth: true,
+        requiresAuth: true,
       },
     },
     {
@@ -23,7 +24,7 @@ const router = createRouter({
       name: "order-info",
       component: () => import("@/pages/OrderId.vue"),
       meta: {
-        auth: true,
+        requiresAuth: true,
       },
     },
     {
@@ -31,20 +32,35 @@ const router = createRouter({
       name: "personal-user",
       component: () => import("@/pages/PersonalUserPage.vue"),
       meta: {
-        auth: true,
+        requiresAuth: true,
       },
     },
   ],
 });
 
-// router.beforeEach((to, from, next) => {
-//   const authStore = useAuthStore();
-
-//   if (to.meta.auth && !authStore.user.accessToken) {
-//     next("/");
-//   } else {
-//     next();
-//   }
-// });
+// Проверка токенов и защита маршрутов
+router.beforeEach(async (to, from, next) => {
+  const authStore = useAuthStore();
+  
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    try {
+      // Попробуем обновить токены только если они истекли
+      if (!authStore.accessToken) {
+        const { data } = await api.refreshTokens("token/refresh/", authStore.refreshToken)
+        authStore.refreshTokens(data);
+      }
+      if (authStore.isAuthenticated) {
+        next();
+      } else {
+        next("/");
+      }
+    } catch (error) {
+      console.error("Failed to refresh tokens during route navigation:", error);
+      next("/");
+    }
+  } else {
+    next();
+  }
+});
 
 export default router;

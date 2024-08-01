@@ -41,6 +41,7 @@
 
       b {
         color: red;
+        text-transform: capitalize;
 
         &.order__content-item_done {
           color: #00f566;
@@ -51,11 +52,11 @@
         color: #527bcd;
       }
 
-      .progress {
+      .in_progress {
         color: #f8b646;
       }
 
-      .done {
+      .completed {
         color: #4cc457;
       }
     }

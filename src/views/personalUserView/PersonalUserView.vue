@@ -1,5 +1,21 @@
 <script setup>
-import { accrued, approved, interest, paid } from "@/helpers/images";
+import { accrued, approved, paid } from "@/helpers/images";
+import api from "@/services/api";
+import { ref } from "vue";
+
+const user = ref(null);
+
+const getUser = async () => {
+  try {
+    const { data } = await api.getUser("users/user_me/");
+    user.value = data.user;
+    console.log(data.user);
+  } catch (error) {
+    console.error(error.detail);
+  }
+};
+
+getUser();
 </script>
 
 <template>
@@ -8,26 +24,28 @@ import { accrued, approved, interest, paid } from "@/helpers/images";
       <div class="personal-user__content">
         <h2 class="personal-user__content-title">Ваш кешбэк</h2>
         <div class="personal-user__info">
-          <p class="personal-user__info-txt">Ваше имя: Тест</p>
-          <p class="personal-user__info-txt">Ваше фамилия: Тестов</p>
-          <p class="personal-user__info-txt">Ваш телефон: +998971234567</p>
+          <p class="personal-user__info-txt">Ваше имя: {{ user?.first_name }}</p>
+          <p class="personal-user__info-txt">Ваше фамилия: {{ user?.last_name }}</p>
+          <p class="personal-user__info-txt">Ваш телефон: {{ user?.p_num }}</p>
         </div>
         <div class="personal-user__content-cards">
           <div class="personal-user__card">
             <img :src="accrued" alt="accrued icon" class="personal-user__card-icon" />
-            <p class="personal-user__card-txt">НАЧИСЛЕНО: 25.20</p>
+            <p class="personal-user__card-txt">
+              НАЧИСЛЕНО: {{ user?.cash_back.total_cash_back }}
+            </p>
           </div>
           <div class="personal-user__card">
             <img :src="paid" alt="paid icon" class="personal-user__card-icon" />
-            <p class="personal-user__card-txt">ОПЛАЧЕНО: 25.20</p>
+            <p class="personal-user__card-txt">
+              ОПЛАЧЕНО: {{ user?.cash_back.received_cash_back }}
+            </p>
           </div>
           <div class="personal-user__card">
             <img :src="approved" alt="approved icon" class="personal-user__card-icon" />
-            <p class="personal-user__card-txt">ОДОБРЕНО: 25.20</p>
-          </div>
-          <div class="personal-user__card">
-            <img :src="interest" alt="interest icon" class="personal-user__card-icon" />
-            <p class="personal-user__card-txt">ПРОЦЕНТЫ: 5%</p>
+            <p class="personal-user__card-txt">
+              ОДОБРЕНО: {{ user?.cash_back.available_cash_back }}
+            </p>
           </div>
         </div>
       </div>

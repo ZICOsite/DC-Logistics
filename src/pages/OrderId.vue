@@ -2,6 +2,9 @@
 import { useNavbg, navBg } from "@/helpers/navBg";
 import OrderIdView from "@/views/orderIdView/OrderIdView.vue";
 import { onMounted, ref } from "vue";
+import { useAuthStore } from "@/stores/authStore";
+
+const authStore = useAuthStore();
 
 const menu = ref(false);
 
@@ -30,7 +33,7 @@ onMounted(() => {
                 >Личный кабинет</RouterLink
               >
             </li>
-            <li class="nav__item">
+            <li class="nav__item" @click="authStore.logout()">
               <RouterLink to="/" class="nav__link">Выйти</RouterLink>
             </li>
           </ul>

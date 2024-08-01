@@ -1,17 +1,49 @@
+import api from "@/services/api";
 import axios from "axios";
+import { useAuthStore } from "@/stores/authStore";
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
     accept: "application/json",
   },
 });
 
-export const axiosAuth = axios.create({
+const axiosAuth = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
     accept: "application/json",
   },
 });
 
-export default axiosInstance
+axiosAuth.interceptors.request.use(
+  async (config) => {
+    const authStore = useAuthStore();
+    if (authStore.accessToken) {
+      config.headers["Authorization"] = `Bearer ${authStore.accessToken}`;
+    }
+
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+axiosAuth.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const authStore = useAuthStore();
+    if (error.response.status === 401) {
+      const { data } = await api.refreshTokens(
+        "token/refresh/",
+        authStore.refreshToken
+      );
+      authStore.refreshTokens(data);
+    }
+  }
+);
+
+export default axiosAuth;

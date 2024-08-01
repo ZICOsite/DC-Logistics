@@ -1,15 +1,10 @@
 <script setup>
-// import axios from "axios";
-// import useAxios from "@/lib/hooks/useAxios";
-// import { useAuthStore } from "@/stores/authStores";
-// import useAxiosAuth from "@/lib/hooks/useAxiosAuth";
+import { useAuthStore } from "@/stores/authStore";
 import { useNavbg, navBg } from "@/helpers/navBg";
 import OrdersView from "@/views/ordersView/OrdersView.vue";
 import { onMounted, ref } from "vue";
 
-// const authStore = useAuthStore();
-// const axiosAuth = useAxiosAuth();
-// console.log(axiosAuth());
+const authStore = useAuthStore();
 
 const menu = ref(false);
 
@@ -38,7 +33,7 @@ onMounted(() => {
                 >Личный кабинет</RouterLink
               >
             </li>
-            <li class="nav__item">
+            <li class="nav__item" @click="authStore.logout()">
               <RouterLink to="/" class="nav__link">Выйти</RouterLink>
             </li>
           </ul>

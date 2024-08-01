@@ -1,5 +1,5 @@
 import { axiosAuth } from "@/lib/axios";
-import { useAuthStore } from "@/stores/authStores";
+import { useAuthStore } from "@/stores/authStore";
 
 const useAxiosAuth = () => {
   const authStore = useAuthStore();

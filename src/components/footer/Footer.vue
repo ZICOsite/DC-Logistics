@@ -12,24 +12,8 @@ const currentYear = computed(() => new Date().getFullYear());
         Наши менеджеры <span class="footer__span">свяжутся с вами!</span>
       </p>
       <form class="footer__form">
-        <input
-          type="text"
-          placeholder="Имя"
-          class="footer__form-input"
-          required
-        />
-        <input
-          type="text"
-          placeholder="Фамилия"
-          class="footer__form-input"
-          required
-        />
-        <input
-          type="text"
-          placeholder="Телефон"
-          class="footer__form-input"
-          required
-        />
+        <input type="text" placeholder="Ф.И.О" class="footer__form-input" required />
+        <input type="text" placeholder="Телефон" class="footer__form-input" required />
         <button class="footer__form-btn">Отправить</button>
       </form>
       <div class="footer__bottom">
@@ -42,12 +26,8 @@ const currentYear = computed(() => new Date().getFullYear());
             <img src="@/assets/images/footer/gmail.svg" alt="" />
             discovery.cargo.logistics@gmail.com
           </a>
-          <a href="tel:+998998250038" class="footer__bottom-tel"
-            >+998 99 825 00 38
-          </a>
-          <a href="tel:+998909390066" class="footer__bottom-tel">
-            +998 90 939 00 66
-          </a>
+          <a href="tel:+998998250038" class="footer__bottom-tel">+998 99 825 00 38 </a>
+          <a href="tel:+998909390066" class="footer__bottom-tel"> +998 90 939 00 66 </a>
         </div>
         <ul class="footer__bottom-socials">
           <li class="footer__bottom-item">
@@ -65,11 +45,7 @@ const currentYear = computed(() => new Date().getFullYear());
             </a>
           </li>
           <li class="footer__bottom-item">
-            <a
-              target="_blank"
-              href="https://t.me/Slam825"
-              class="footer__bottom-link"
-            >
+            <a target="_blank" href="https://t.me/Slam825" class="footer__bottom-link">
               <img
                 src="@/assets/images/footer/telegram.svg"
                 width="40"
@@ -94,9 +70,7 @@ const currentYear = computed(() => new Date().getFullYear());
           </li>
         </ul>
       </div>
-      <p class="footer__copyright">
-        &copy; {{ currentYear }}. Все права защищены.
-      </p>
+      <p class="footer__copyright">&copy; {{ currentYear }}. Все права защищены.</p>
     </div>
   </footer>
 </template>

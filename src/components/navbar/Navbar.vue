@@ -1,36 +1,38 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import Modal from "@/components/modal/Modal.vue";
-// import axiosClient from "@/lib/axios";
 import { useRouter } from "vue-router";
 import { useNavbg, navBg } from "@/helpers/navBg";
-// import { useAuthStore } from "@/stores/authStores";
+import api from "@/services/api";
+import { useAuthStore } from "@/stores/authStore";
 
 const router = useRouter();
-// const authStore = useAuthStore();
+const authStore = useAuthStore();
 
 const menu = ref(false);
 const modal = ref(false);
+const isValid = ref(false);
 
-// const getAuthUser = async (event) => {
-//   try {
-//     const { data } = await axiosClient.post("token/", {
-//       p_num: event.target.phone.value,
-//       password: event.target.password.value,
-//     });
+const getAuthUser = async (event) => {
+  try {
+    const { data } = await api.login(
+      "token/",
+      event.target.phone.value,
+      event.target.password.value
+    );
+    authStore.login(data.access, data.refresh);
+    router.push("/orders");
+    modal.value = false;
+    isValid.value = false;
+  } catch (error) {
+    console.error(error.detail);
+    isValid.value = true;
+  }
+};
 
-//     authStore.setUser(data.access);
-
-//     modal.value = false;
-
-//     router.push("/kanban");
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-const getAuthUser = () => {
-  router.push("/orders");
+const regOrOrders = () => {
+  if (authStore.accessToken) router.push("/orders");
+  else modal.value = true;
 };
 
 onMounted(() => {
@@ -43,14 +45,9 @@ onMounted(() => {
     <nav class="navbar" :class="{ active: navBg }">
       <div class="container">
         <RouterLink to="/" class="navbar__logo">
-          <img
-            src="@/assets/images/logo.png"
-            alt="logo"
-            width="92"
-            height="75"
-          />
+          <img src="@/assets/images/logo.png" alt="logo" width="92" height="75" />
         </RouterLink>
-        <form @submit.prevent="modal = true" class="navbar__truckCode">
+        <form @submit.prevent="regOrOrders" class="navbar__truckCode">
           <input
             type="text"
             placeholder="Введите трек номер"
@@ -72,10 +69,13 @@ onMounted(() => {
             <li class="navbar__item">
               <a href="#footer" class="navbar__link">Наши Контакты</a>
             </li>
-            <li class="navbar__item">
+            <li class="navbar__item" v-if="!authStore.accessToken">
               <RouterLink to="/" class="navbar__link" @click="modal = true"
                 >Войти</RouterLink
               >
+            </li>
+            <li class="navbar__item" v-else>
+              <RouterLink to="/orders" class="navbar__link">Заказы</RouterLink>
             </li>
           </ul>
         </div>
@@ -103,7 +103,8 @@ onMounted(() => {
             </span>
             <h2 class="modal__title">Введите данные</h2>
             <p class="modal__txt">
-              Которые были переданы от <span class="modal__span">наших менеджеров</span>
+              Которые были переданы от
+              <span class="modal__span">наших менеджеров</span>
             </p>
             <p class="modal__txt"></p>
             <form class="modal__form" @submit.prevent="getAuthUser">
@@ -112,6 +113,7 @@ onMounted(() => {
                 type="text"
                 placeholder="Телефон"
                 class="modal__form-input"
+                :class="{ valid: isValid }"
                 required
               />
               <input
@@ -119,8 +121,12 @@ onMounted(() => {
                 type="password"
                 placeholder="Пароль"
                 class="modal__form-input"
+                :class="{ valid: isValid }"
                 required
               />
+              <span class="modal__form-span" v-show="isValid"
+                >Телефон или пароль введен не правильно</span
+              >
               <button class="modal__form-btn">Отправить</button>
             </form>
           </div>

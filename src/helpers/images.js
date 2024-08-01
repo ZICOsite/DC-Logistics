@@ -8,13 +8,6 @@ export { default as servicesImg7 } from "@/assets/images/services/7.png";
 export { default as servicesImg8 } from "@/assets/images/services/8.webp";
 export { default as servicesImg9 } from "@/assets/images/services/9.jpg";
 
-export { default as cargoImg1 } from "@/assets/images/cargo/1.jpg";
-export { default as cargoImg2 } from "@/assets/images/cargo/2.jpg";
-export { default as cargoImg3 } from "@/assets/images/cargo/3.jpg";
-export { default as cargoImg4 } from "@/assets/images/cargo/4.jpg";
-export { default as cargoImg5 } from "@/assets/images/cargo/5.jpg";
-export { default as cargoImg6 } from "@/assets/images/cargo/6.jpg";
-
 export { default as benefitsImg1 } from "@/assets/images/benefits/calendar.png";
 export { default as benefitsImg2 } from "@/assets/images/benefits/truck.png";
 export { default as benefitsImg3 } from "@/assets/images/benefits/agreement.png";

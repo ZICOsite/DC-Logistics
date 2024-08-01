@@ -1,23 +1,31 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from "vue-router";
 import Modal from "@/components/modal/Modal.vue";
 import { ref } from "vue";
-import { useAuthStore } from "@/stores/authStores";
+import { useAuthStore } from "@/stores/authStore";
+import api from "./services/api";
 
-const authStore = useAuthStore()
+const authStore = useAuthStore();
 
 const modal = ref(false);
 
 setTimeout(() => {
   modal.value = true;
 }, 10000);
+
+const setUser = async (event) => {
+  const res = await api.applications("applications/", {
+    name: event.target.userName.value,
+    phone_number: event.target.userPhone.value,
+  });
+};
 </script>
 
 <template>
   <RouterView />
   <Teleport to="#zico">
     <Transition name="modal">
-      <Modal v-if="modal && !authStore.user.accessToken" @click="modal = false">
+      <Modal v-if="modal && !authStore.accessToken" @click="modal = false">
         <div class="modal__content" @click.stop>
           <span class="modal__content-close" @click="modal = false">
             <svg
@@ -36,15 +44,17 @@ setTimeout(() => {
           <p class="modal__txt">
             Наши менеджеры <span class="modal__span">свяжутся с вами!</span>
           </p>
-          <form class="modal__form">
+          <form class="modal__form" @submit.prevent="setUser">
             <input
               type="text"
-              placeholder="Имя"
+              name="userName"
+              placeholder="Ф.И.О"
               class="modal__form-input"
               required
             />
             <input
               type="text"
+              name="userPhone"
               placeholder="Телефон"
               class="modal__form-input"
               required
