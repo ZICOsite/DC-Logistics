@@ -39,7 +39,7 @@ const orderStatus = computed(() => {
           class="order__content-image"
         />
         <ul class="order__content-list">
-          <li class="order__content-item">Название товара: Тест</li>
+          <li class="order__content-item">Название товара: {{ orderId?.name }}</li>
           <li class="order__content-item">Ваш трек номер: {{ orderId?.truck_num }}</li>
           <li class="order__content-item">Вес товара: {{ orderId?.weight }} кг</li>
           <li class="order__content-item">Куб товара: {{ orderId?.cuba }}</li>
@@ -60,7 +60,7 @@ const orderStatus = computed(() => {
                 'order__content-item_done': route.params.status == 'completed',
               }"
             >
-              {{ orderId?.country }}
+              {{ orderId?.country.name }}
             </b>
             <b
               v-else

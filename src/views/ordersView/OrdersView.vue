@@ -3,14 +3,16 @@ import api from "@/services/api";
 import { ref } from "vue";
 
 const kanban = ref(null);
+const count = ref(null);
 
 const getOrders = async () => {
   try {
-    const { data } = await api.getOrders("orders/kanban_view/");
-    const orders = Object.groupBy(data, ({ status }) => status);
+    const { data } = await api.getOrders("orders/");
+    const orders = Object.groupBy(data?.results, ({ status }) => status);
+    count.value = data.count;
     kanban.value = orders;
   } catch (error) {
-    console.error(error.detail);
+    console.error(error);
   }
 };
 
@@ -20,8 +22,10 @@ getOrders();
 <template>
   <section class="orders">
     <div class="container">
-      <h2 class="orders__title">Статус заказов</h2>
-      <div class="orders__content">
+      <h2 class="orders__title">
+        {{ count ? "Статус заказов" : "Заказов нет" }}
+      </h2>
+      <div class="orders__content" v-if="count">
         <div class="orders__content-cards">
           <div :class="['orders__content-card', { pending: kanban?.pending }]">
             <h3 class="orders__content-title">✔ В ожидании</h3>

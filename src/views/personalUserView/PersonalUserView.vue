@@ -32,19 +32,19 @@ getUser();
           <div class="personal-user__card">
             <img :src="accrued" alt="accrued icon" class="personal-user__card-icon" />
             <p class="personal-user__card-txt">
-              НАЧИСЛЕНО: {{ user?.cash_back.total_cash_back }}
+              НАЧИСЛЕНО: {{ user?.cash_back?.total_cash_back || 0 }}
             </p>
           </div>
           <div class="personal-user__card">
             <img :src="paid" alt="paid icon" class="personal-user__card-icon" />
             <p class="personal-user__card-txt">
-              ОПЛАЧЕНО: {{ user?.cash_back.received_cash_back }}
+              ОПЛАЧЕНО: {{ user?.cash_back?.received_cash_back || 0 }}
             </p>
           </div>
           <div class="personal-user__card">
             <img :src="approved" alt="approved icon" class="personal-user__card-icon" />
             <p class="personal-user__card-txt">
-              ОДОБРЕНО: {{ user?.cash_back.available_cash_back }}
+              ОДОБРЕНО: {{ user?.cash_back?.available_cash_back || 0 }}
             </p>
           </div>
         </div>
