@@ -1,0 +1,63 @@
+.admin {
+  min-height: 100dvh;
+  background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.71) 0%,
+      rgba(0, 0, 0, 0.477) 100%
+    ),
+    url(@/assets/images/intro/banner.JPG) no-repeat center top / cover;
+  display: flex;
+  align-items: center;
+
+  &__title {
+    text-align: center;
+    color: #fff;
+    font-size: clamp(24px, 5vw, 36px);
+  }
+
+  &__users {
+    margin-top: 30px;
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+
+    &-table {
+      width: 100%;
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+
+    &-thead th {
+      padding: 8px 2px;
+      text-align: left;
+    }
+
+    &-item td {
+      border-bottom: 1px solid #f0f0f0;
+      padding: 8px 2px;
+    }
+
+    &-phone a {
+      color: dodgerblue;
+    }
+
+    &-percent {
+      background: #f0f0f0;
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+
+    &-send {
+      background: dodgerblue;
+      padding: 6px 10px;
+      cursor: pointer;
+      color: #fff;
+      border-radius: 4px;
+    }
+
+    &-form {
+      display: flex;
+      gap: 30px;
+    }
+  }
+}

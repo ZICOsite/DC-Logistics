@@ -4,10 +4,18 @@ export const useAuthStore = defineStore("auth", {
   state: () => ({
     accessToken: localStorage.getItem("accessToken") || "",
     refreshToken: localStorage.getItem("refreshToken") || "",
+    isStaff: localStorage.getItem("is_staff") || false,
+    users: null,
   }),
   getters: {
     isAuthenticated(state) {
       return !!state.accessToken;
+    },
+    getTotalOrdersUserById(state) {
+      return (userId) =>
+        state.users
+          .find((user) => user.id === userId)
+          ?.orders?.reduce((acc, item) => (acc += item.price), 0);
     },
   },
   actions: {
@@ -32,6 +40,14 @@ export const useAuthStore = defineStore("auth", {
     },
     logout() {
       this.clearTokens();
+      localStorage.removeItem("is_staff");
+    },
+    getStaff(user) {
+      localStorage.setItem("is_staff", user.is_staff);
+      this.isStaff = user.is_staff;
+    },
+    getUsers(users) {
+      this.users = users;
     },
   },
 });

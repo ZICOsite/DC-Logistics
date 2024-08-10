@@ -4,6 +4,7 @@ import Modal from "@/components/modal/Modal.vue";
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/authStore";
 import api from "./services/api";
+import { toast } from "vue3-toastify";
 
 const authStore = useAuthStore();
 
@@ -14,10 +15,24 @@ setTimeout(() => {
 }, 10000);
 
 const setUser = async (event) => {
-  const res = await api.applications("applications/", {
-    name: event.target.userName.value,
-    phone_number: event.target.userPhone.value,
-  });
+  try {
+    await toast.promise(
+      api.applications(
+        "applications/",
+        event.target.userName.value,
+        event.target.userPhone.value
+      ),
+      {
+        pending: "Запрос отправляется",
+        success: "Ваш запрос отправлено",
+        error: "Запрос отклонен",
+      }
+    );
+  } catch (error) {
+    console.error(error.detail);
+  }
+
+  modal.value = false;
 };
 </script>
 

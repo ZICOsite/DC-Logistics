@@ -1,7 +1,31 @@
 <script setup>
-import { computed } from "vue";
+import api from "@/services/api";
+import { computed, ref } from "vue";
+import { toast } from "vue3-toastify";
 
 const currentYear = computed(() => new Date().getFullYear());
+
+const setUser = async (event) => {
+  try {
+    await toast.promise(
+      api.applications(
+        "applications/",
+        event.target.userName.value,
+        event.target.userPhone.value
+      ),
+      {
+        pending: "Запрос отправляется",
+        success: "Ваш запрос отправлено",
+        error: "Запрос отклонен",
+      }
+    );
+  } catch (error) {
+    console.error(error.detail);
+  }
+
+  event.target.userName.value = "";
+  event.target.userPhone.value = "";
+};
 </script>
 
 <template>
@@ -11,9 +35,21 @@ const currentYear = computed(() => new Date().getFullYear());
       <p class="footer__txt">
         Наши менеджеры <span class="footer__span">свяжутся с вами!</span>
       </p>
-      <form class="footer__form">
-        <input type="text" placeholder="Ф.И.О" class="footer__form-input" required />
-        <input type="text" placeholder="Телефон" class="footer__form-input" required />
+      <form class="footer__form" @submit.prevent="setUser">
+        <input
+          type="text"
+          placeholder="Ф.И.О"
+          class="footer__form-input"
+          name="userName"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Телефон"
+          class="footer__form-input"
+          name="userPhone"
+          required
+        />
         <button class="footer__form-btn">Отправить</button>
       </form>
       <div class="footer__bottom">

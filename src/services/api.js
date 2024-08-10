@@ -11,6 +11,15 @@ const api = {
   getUser(url) {
     return axiosAuth.get(url);
   },
+  getUsers(url) {
+    return axiosAuth.get(url);
+  },
+  calcCashback(url, id, percentage) {
+    return axiosAuth.post(url, {
+      user: id,
+      cash_back_percentage: percentage,
+    });
+  },
   login(url, phone, password) {
     return axiosInstance.post(url, {
       p_num: phone,

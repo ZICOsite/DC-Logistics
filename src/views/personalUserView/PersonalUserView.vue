@@ -1,6 +1,7 @@
 <script setup>
 import { accrued, approved, paid } from "@/helpers/images";
 import api from "@/services/api";
+import { useAuthStore } from "@/stores/authStore";
 import { ref } from "vue";
 
 const user = ref(null);
@@ -9,7 +10,6 @@ const getUser = async () => {
   try {
     const { data } = await api.getUser("users/user_me/");
     user.value = data.user;
-    console.log(data.user);
   } catch (error) {
     console.error(error.detail);
   }
@@ -32,19 +32,19 @@ getUser();
           <div class="personal-user__card">
             <img :src="accrued" alt="accrued icon" class="personal-user__card-icon" />
             <p class="personal-user__card-txt">
-              НАЧИСЛЕНО: {{ user?.cash_back?.total_cash_back || 0 }}
+              НАЧИСЛЕНО: {{ user?.cash_back?.total_cash_back || 0 }} $
             </p>
           </div>
           <div class="personal-user__card">
             <img :src="paid" alt="paid icon" class="personal-user__card-icon" />
             <p class="personal-user__card-txt">
-              ОПЛАЧЕНО: {{ user?.cash_back?.received_cash_back || 0 }}
+              ОПЛАЧЕНО: {{ user?.cash_back?.received_cash_back || 0 }} $
             </p>
           </div>
           <div class="personal-user__card">
             <img :src="approved" alt="approved icon" class="personal-user__card-icon" />
             <p class="personal-user__card-txt">
-              ОДОБРЕНО: {{ user?.cash_back?.available_cash_back || 0 }}
+              ОДОБРЕНО: {{ user?.cash_back?.available_cash_back || 0 }} $
             </p>
           </div>
         </div>
