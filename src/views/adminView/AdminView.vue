@@ -41,8 +41,10 @@ const test = async (event) => {
 <template>
   <section class="admin">
     <div class="container">
-      <h2 class="admin__title">Users</h2>
-      <div class="admin__users">
+      <h2 class="admin__title">
+        {{ authStore.users?.length ? "Пользователи" : "Нету пользователей" }}
+      </h2>
+      <div class="admin__users" v-if="authStore.users?.length">
         <table class="admin__users-table">
           <thead class="admin__users-thead">
             <tr class="admin__users-row">

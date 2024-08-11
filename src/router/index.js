@@ -44,7 +44,7 @@ const router = createRouter({
         const getUser = async () => {
           try {
             const { data } = await api.getUser("users/user_me/");
-            authStore.getStaff(data.user)
+            authStore.getStaff(data.user);
           } catch (error) {
             console.error(error.detail);
           }
@@ -60,6 +60,28 @@ const router = createRouter({
             hash: to.hash,
           };
         }
+      },
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/cashback-history",
+      name: "cashback-history",
+      component: () => import("@/pages/CashbackHistoryPage.vue"),
+      beforeEnter(to, from) {
+        const authStore = useAuthStore();
+        if (!authStore.isStaff) {
+          return {
+            name: "home",
+            params: { pathMatch: to.path.split("/").slice(1) },
+            query: to.query,
+            hash: to.hash,
+          };
+        }
+      },
+      meta: {
+        requiresAuth: true,
       },
     },
     // {

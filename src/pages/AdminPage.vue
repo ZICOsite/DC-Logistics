@@ -21,6 +21,14 @@ onMounted(() => {
         </RouterLink>
         <div class="nav__menu" :class="{ active: menu }">
           <ul class="nav__list">
+            <li class="nav__item">
+              <RouterLink to="/admin" class="nav__link">Пользователи</RouterLink>
+            </li>
+            <li class="nav__item">
+              <RouterLink to="/cashback-history" class="nav__link"
+                >История кешбэков</RouterLink
+              >
+            </li>
             <li class="nav__item" @click="authStore.logout()">
               <RouterLink to="/" class="nav__link">Выйти</RouterLink>
             </li>

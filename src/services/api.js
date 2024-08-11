@@ -20,6 +20,9 @@ const api = {
       cash_back_percentage: percentage,
     });
   },
+  cashbackHistory(url) {
+    return axiosAuth.get(url);
+  },
   login(url, phone, password) {
     return axiosInstance.post(url, {
       p_num: phone,

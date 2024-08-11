@@ -26,7 +26,7 @@ getOrders();
         {{ count ? "Статус заказов" : "Заказов нет" }}
       </h2>
       <div class="orders__content" v-if="count">
-        <div class="orders__content-cards">
+        <div class="orders__content-cards" v-if="kanban?.pending">
           <div :class="['orders__content-card', { pending: kanban?.pending }]">
             <h3 class="orders__content-title">✔ В ожидании</h3>
             <ul class="orders__content-list">
@@ -45,7 +45,7 @@ getOrders();
             </ul>
           </div>
         </div>
-        <div class="orders__content-cards">
+        <div class="orders__content-cards" v-if="kanban?.in_progress">
           <div :class="['orders__content-card', { progress: kanban?.in_progress }]">
             <h3 class="orders__content-title">✔ В процессе</h3>
             <ul class="orders__content-list">
@@ -64,7 +64,7 @@ getOrders();
             </ul>
           </div>
         </div>
-        <div class="orders__content-cards">
+        <div class="orders__content-cards" v-if="kanban?.completed">
           <div :class="['orders__content-card', { done: kanban?.completed }]">
             <h3 class="orders__content-title">✔ Завершенный</h3>
             <ul class="orders__content-list">

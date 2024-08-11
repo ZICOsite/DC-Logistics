@@ -1,9 +1,8 @@
 <script setup>
 import { useAuthStore } from "@/stores/authStore";
 import { useNavbg, navBg } from "@/helpers/navBg";
-import OrdersView from "@/views/ordersView/OrdersView.vue";
 import { onMounted, ref } from "vue";
-
+import CashbackHistoryView from "@/views/cashbackHistoryView/CashbackHistoryView.vue";
 const authStore = useAuthStore();
 
 const menu = ref(false);
@@ -23,14 +22,11 @@ onMounted(() => {
         <div class="nav__menu" :class="{ active: menu }">
           <ul class="nav__list">
             <li class="nav__item">
-              <RouterLink to="/" class="nav__link">О нас</RouterLink>
+              <RouterLink to="/admin" class="nav__link">Пользователи</RouterLink>
             </li>
             <li class="nav__item">
-              <RouterLink to="/orders" class="nav__link">Заказы</RouterLink>
-            </li>
-            <li class="nav__item">
-              <RouterLink to="/personal-user" class="nav__link"
-                >Личный кабинет</RouterLink
+              <RouterLink to="/cashback-history" class="nav__link"
+                >История кешбэков</RouterLink
               >
             </li>
             <li class="nav__item" @click="authStore.logout()">
@@ -45,6 +41,6 @@ onMounted(() => {
     </nav>
   </header>
   <main>
-    <OrdersView />
+    <CashbackHistoryView />
   </main>
 </template>

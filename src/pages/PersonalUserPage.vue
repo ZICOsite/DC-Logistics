@@ -29,7 +29,7 @@ onMounted(() => {
               <RouterLink to="/orders" class="nav__link">Заказы</RouterLink>
             </li>
             <li class="nav__item">
-              <RouterLink to="/personal-user" class="nav__link current"
+              <RouterLink to="/personal-user" class="nav__link"
                 >Личный кабинет</RouterLink
               >
             </li>
