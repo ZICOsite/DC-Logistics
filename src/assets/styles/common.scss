@@ -35,3 +35,36 @@ input, button, textarea {
     margin: 0 auto;
     padding: 0 15px;
 }
+
+.error {
+    height: 100dvh;
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.71) 0%,
+        rgba(0, 0, 0, 0.477) 100%
+      ),
+      url(@/assets/images/intro/banner.JPG) no-repeat center top / cover;
+    display: flex;
+    align-items: center;
+    padding: 30px 0;
+
+    .container {
+        display: grid;
+        place-items: center;
+        gap: 16px;
+        color: #fff;
+    }
+
+    &__title {
+        font-size: 10vw;
+    }
+
+    &__txt {
+        font-size: clamp(18px, 5vw, 38px);
+    }
+
+    &__link {
+        color: #fff;
+        font-size: clamp(16px, 5vw, 28px);
+    }
+}

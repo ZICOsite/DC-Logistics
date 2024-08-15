@@ -16,7 +16,7 @@ const getUsers = async () => {
 
 getUsers();
 
-const test = async (event) => {
+const calcPersentage = async (event) => {
   try {
     await toast.promise(
       api.calcCashback(
@@ -52,6 +52,7 @@ const test = async (event) => {
               <th class="admin__users-cell">Name</th>
               <th class="admin__users-cell">Phone number</th>
               <th class="admin__users-cell">Order prices</th>
+              <th class="admin__users-cell">Calculated</th>
               <th class="admin__users-cell">Cashback percentage</th>
             </tr>
           </thead>
@@ -71,8 +72,21 @@ const test = async (event) => {
               <td class="admin__users-price">
                 {{ authStore.getTotalOrdersUserById(user.id) }} $
               </td>
+              <td class="admin__users-calculated">
+                {{
+                  user.persentage
+                    ? authStore.getTotalOrdersUserById(user.id) -
+                      (authStore.getTotalOrdersUserById(user.id) / 100) * user.persentage
+                    : 0
+                }}
+                $
+              </td>
               <td>
-                <form action="" @submit.prevent="test" class="admin__users-form">
+                <form
+                  action=""
+                  @submit.prevent="calcPersentage"
+                  class="admin__users-form"
+                >
                   <input
                     type="number"
                     class="admin__users-percent"

@@ -73,7 +73,7 @@ const router = createRouter({
         const authStore = useAuthStore();
         if (!authStore.isStaff) {
           return {
-            name: "home",
+            name: "NotFound",
             params: { pathMatch: to.path.split("/").slice(1) },
             query: to.query,
             hash: to.hash,
@@ -84,11 +84,11 @@ const router = createRouter({
         requiresAuth: true,
       },
     },
-    // {
-    //   path: "/:pathMatch(.*)*",
-    //   name: "NotFound",
-    //   component: () => import("@/pages/NotFoundPage.vue"),
-    // },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: () => import("@/pages/NotFoundPage.vue"),
+    },
   ],
 });
 

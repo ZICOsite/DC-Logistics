@@ -6,7 +6,7 @@ const cashbacks = ref();
 
 const cashbackHistory = async () => {
   const { data } = await api.cashbackHistory("cashback-history/");
-  cashbacks.value = data.results;
+  cashbacks.value = data;
 };
 
 cashbackHistory();
